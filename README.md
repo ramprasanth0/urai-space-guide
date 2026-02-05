@@ -146,6 +146,11 @@ To put this in perspective:
 - Switch accounts easily
 - Each account has unique encryption keys
 
+### ⚙️ User Control
+- **Change Password**: Rotate your master key without losing data (thanks to Key Wrapping)
+- **Export Data**: Download a decrypted JSON backup of your entire vault (Password protected)
+- **Delete Account**: Permanently wipe all your data from the server
+
 ### 🎨 Modern UI
 - Dark/Light mode
 - Glassmorphism design

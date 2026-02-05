@@ -254,4 +254,6 @@ Yes! Your encrypted data syncs across all devices. Just sign in with your email 
 
 <p align="center">
   Made with 🔐 for privacy-conscious individuals
+  <br>
+  <sub>*"To find the silence, one must strike the heart of the space five times. 🌌"*</sub>
 </p>

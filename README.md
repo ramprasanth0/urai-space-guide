@@ -230,7 +230,7 @@ Yes! Your encrypted data syncs across all devices. Just sign in with your email 
 
 - **Security Details** - See [SECURITY.md](SECURITY.md) for technical specifications
 - **Changelog** - See [CHANGELOG.md](CHANGELOG.md) for version history
-- **Support** - [Contact us or file an issue]
+- **Feedback** - [Report a Bug](https://github.com/ramprasanth0/urai-space-guide/issues/new?template=bug_report.md) or [Request a Feature](https://github.com/ramprasanth0/urai-space-guide/issues/new?template=feature_request.md)
 
 ---
 

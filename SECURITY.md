@@ -57,107 +57,105 @@ Urai Space implements a **true zero-knowledge architecture**, meaning:
 
 ---
 
-## 🏗️ Security Architecture Flow
+## 🔐 Security in Plain English
 
-### Account Creation
+Imagine Urai Space as a **physical safe** in your house.
 
-```
-1. User enters password
-   ↓
-2. Generate random 128-bit salt
-   ↓
-3. PBKDF2(password + salt) → 64 bytes
-   ├─ First 32 bytes  → Authentication Key
-   └─ Second 32 bytes → Encryption Key
-   ↓
-4. Hash(Authentication Key) → Stored on server
-   (Original authentication key discarded)
-   ↓
-5. Encryption Key → Stays in browser memory ONLY
-   ↓
-6. Generate 12-word recovery phrase
-   ↓
-7. Encrypt Encryption Key with recovery phrase
-   ↓
-8. Store encrypted lockbox on server
-```
+*   **The Safe**: This is your account.
+*   **The Key**: This is your Password.
+*   **The Backup Key**: This is your 12-Word Recovery Phrase.
 
-**What's stored on server:**
-- Salt (public, safe to share)
-- Auth hash (cannot be reversed to get password)
-- Encrypted lockbox (cannot be decrypted without recovery phrase)
+**We (Urai Space) build the safe, but we do NOT have a copy of the key.** 
+If you lose your key (Password) AND your backup key (Recovery Phrase), the safe stays locked forever. We cannot open it for you, no matter what.
 
-**What's NOT stored anywhere:**
-- Your actual password
-- Your encryption key (exists only in browser memory)
+---
 
-### Data Encryption
+## 🏗️ Visual Security Flows
 
-```
-1. User creates diary entry/note/drawing
-   ↓
-2. Generate random 96-bit IV
-   ↓
-3. AES-256-GCM encrypt with:
-   - Plaintext: Your content
-   - Key: Encryption key (from memory)
-   - IV: Random IV
-   ↓
-4. Output: IV + Ciphertext + Authentication Tag
-   ↓
-5. Send to server (all components transmitted together)
-   ↓
-6. Plaintext is immediately cleared from memory
+### 1. How Account Creation Works
+We scramble your password so only YOU can use it to unlock your data.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser (Your Device)
+    participant Server (Urai Cloud)
+
+    User->>Browser: Enters "MySecretPass"
+    Browser->>Browser: 🎲 Generates Random Salt
+    Browser->>Browser: 🔑 Derives Keys (PBKDF2)
+    Note over Browser: Key 1: Auth Hash (for login)<br/>Key 2: Encryption Key (for data)
+    
+    Browser->>Browser: 🛠️ Generates Master Key
+    Browser->>Browser: 🔒 Wraps Master Key with Key 2
+    
+    Browser->>Server: Sends Auth Hash + Salt + Wrapped Key
+    Note right of Server: Server stores these,<br/>but CANNOT read them.
 ```
 
-### Data Decryption
+### 2. How We Encrypt Your Data
+Your notes are turned into "gibberish" *before* they leave your computer.
 
-```
-1. Fetch encrypted data from server
-   ↓
-2. Extract: IV + Ciphertext + Tag
-   ↓
-3. AES-256-GCM decrypt with:
-   - Ciphertext: Encrypted content
-   - Key: Encryption key (from memory)
-   - IV: Stored IV
-   ↓
-4. Verify authentication tag
-   ↓
-5. Display plaintext to user
-   ↓
-6. Plaintext exists only in memory, never persisted
-```
+```mermaid
+graph LR
+    User[📝 You write a Note]
+    Browser[💻 Your Browser]
+    Cloud[☁️ Urai Server]
 
-### Password Reset (Recovery Phrase)
-
-```
-1. User provides 12-word recovery phrase
-   ↓
-2. Fetch encrypted lockbox from server
-   ↓
-3. Derive key from recovery phrase (client-side)
-   ↓
-4. Decrypt lockbox → Original Encryption Key
-   ↓
-5. Fetch ALL encrypted data from server
-   ↓
-6. Decrypt each item (in memory, one at a time)
-   ↓
-7. User enters NEW password
-   ↓
-8. Generate NEW salt and NEW Encryption Key
-   ↓
-9. Re-encrypt each item with NEW key
-   ↓
-10. Create NEW encrypted lockbox
-    ↓
-11. Upload re-encrypted data + new auth hash + new lockbox
-    ↓
-12. Old keys cleared from memory
+    User -->|Plain Text| Browser
+    Browser -->|Encrypts with Master Key| Cipher[🔒 Encrypted Blob]
+    Cipher -->|Uploads| Cloud
+    
+    style User fill:#e1f5fe
+    style Browser fill:#fff9c4
+    style Cloud fill:#f3e5f5
+    style Cipher fill:#ffccbc,stroke:#ff5722,stroke-width:2px
 ```
 
-**Important:** During password reset, your data exists briefly in RAM during re-encryption. It is **never** transmitted in plaintext and is immediately cleared after re-encryption.
+### 3. Secure Data Export (JSON Backup)
+When you export, we duplicate the decryption process locally so you get a readable file.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Request Export + Password
+    Browser->>Browser: ✅ Verifies Password (Unwraps Key)
+    Browser->>Server: 📥 Request ALL Encrypted Blobs
+    Server-->>Browser: Sends Encrypted Data
+    
+    loop Every Note/Drawing
+        Browser->>Browser: 🔓 Decrypts in Memory
+    end
+    
+    Browser->>User: 💾 Saves "urai-backup.json" to Disk
+    Note over Browser: Plain text never touches<br/>the Server!
+```
+
+### 4. Account Deletion (The "Nuclear" Option)
+Deleting your account destroys the mathematical keys required to read your data.
+
+```mermaid
+graph TD
+    User[👤 User requests Delete] -->|Clicks Button| Client[💻 Client]
+    Client -->|Calls Secure Function| DB[🗄️ Database]
+    
+    DB -->|Deletes| Salt[🧂 Salt]
+    DB -->|Deletes| Keys[🔑 Wrapped Keys]
+    DB -->|Deletes| Data[📝 Encrypted Data]
+    
+    subgraph "The Result"
+        Salt -.->|Gone| Void[🚫 Unrecoverable]
+        Keys -.->|Gone| Void
+        Data -.->|Gone| Void
+    end
+    
+    style Void fill:#ffcdd2,stroke:#c62828
+```
+
+**Why is this secure?** Even if a hacker had a backup of our database, without the **Salt** and **Keys** (which are unique to you and now deleted), the data is just useless random noise.
 
 ---
 

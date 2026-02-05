@@ -38,6 +38,9 @@ Urai Space is built with **zero-knowledge architecture**. This means:
 
 ### 🔐 Encryption Specifications
 
+> **Want a simple explanation?** 
+> Check out our **[Security in Plain English](SECURITY.md)** guide to see visual diagrams of how your data is protected.
+
 | Component | Specification | Why It Matters |
 |-----------|--------------|----------------|
 | **Encryption** | AES-256-GCM | Same encryption used by governments and banks. 2²⁵⁶ possible keys. |
@@ -147,8 +150,9 @@ To put this in perspective:
 - Each account has unique encryption keys
 
 ### ⚙️ User Control
-- **Change Password**: Rotate your master key without losing data (thanks to Key Wrapping)
-- **Export Data**: Download a decrypted JSON backup of your entire vault (Password protected)
+- **Change Password**: Rotate your master key without losing data (thanks to## Release Notes v1.2.0
+
+*   **Fixed Export**: You can now download a decrypted backup of all your data (JSON format).ult (Password protected)
 - **Delete Account**: Permanently wipe all your data from the server
 
 ### 🎨 Modern UI

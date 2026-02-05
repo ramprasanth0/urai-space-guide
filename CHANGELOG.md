@@ -5,6 +5,13 @@ All notable changes to Urai Space will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-05
+
+### 🚀 New Features
+- **Data Export** - Decrypted JSON backup using secure `verifyPassword` check.
+- **Account Deletion** - Permanent account removal using `delete_own_user` RPC.
+- **Recovery Fix** - Enabling recovery even when logged out via `get_recovery_blob`.
+
 ## [1.1.0] - 2026-02-05
 
 ### 🎨 New Features

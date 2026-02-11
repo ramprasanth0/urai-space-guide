@@ -150,9 +150,8 @@ To put this in perspective:
 - Each account has unique encryption keys
 
 ### ⚙️ User Control
-- **Change Password**: Rotate your master key without losing data (thanks to## Release Notes v1.2.0
-
-*   **Fixed Export**: You can now download a decrypted backup of all your data (JSON format).ult (Password protected)
+- **Change Password**: Rotate your master key without losing data (thanks to Key Wrapping)
+- **Export Data**: Download a decrypted backup of all your data (JSON format, password protected)
 - **Delete Account**: Permanently wipe all your data from the server
 
 ### 🎨 Modern UI

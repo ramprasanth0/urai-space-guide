@@ -143,6 +143,12 @@ To put this in perspective:
 - **Neon Palette** - 6 curated colors
 - **Gallery Mode** - Grid view with bulk management
 
+### 🏁 Routine Tracker
+- **Guided Habits** - Create multi-day challenges (e.g., 21-day streaks)
+- **Daily Journaling** - Record reflections for each day of your routine
+- **Progress Tracking** - Visual grid to see your consistency at a glance
+- **Private & Encrypted** - All routine journals are encrypted with your master key
+
 ### 👥 Multi-Account
 - Multiple accounts per device
 - Complete data isolation
@@ -154,10 +160,12 @@ To put this in perspective:
 - **Export Data**: Download a decrypted backup of all your data (JSON format, password protected)
 - **Delete Account**: Permanently wipe all your data from the server
 
-### 🎨 Modern UI
-- Dark/Light mode
-- Glassmorphism design
-- Responsive on all devices
+### 🎨 Modern UI & UX
+- **Dark/Light mode** - Beautiful theme toggle
+- **Glassmorphism design** - Modern frosted glass effects
+- **Seamless Mobile Experience** - Smooth fixed navigation bars and header
+- **Haptic Feedback** - Tactile confirmation for navigation and saving
+- **Responsive layout** - Works flawlessly on desktop and mobile
 
 ---
 
@@ -195,6 +203,13 @@ Visit **[Your App URL Here]** to start using Urai Space today!
 2. Use the pen tool to create sketches
 3. Choose from 6 neon colors
 4. Switch to gallery mode to view all your drawings
+
+### Tracking Routines
+
+1. Click the **Routine** tab
+2. Click **"New Routine"** to start a challenge (e.g., "10 Day Meditation")
+3. Select any day in the tracker to write your daily reflection
+4. Track your progress visually as you complete your goals
 
 ### Managing Multiple Accounts
 

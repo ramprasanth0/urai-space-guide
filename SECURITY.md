@@ -133,6 +133,9 @@ sequenceDiagram
     Browser->>User: 💾 Saves "urai-backup.json" to Disk
     Note over Browser: Plain text never touches<br/>the Server!
 ```
+📔 Diary → encrypt() → ciphertext
+📝 Notes → encrypt() → ciphertext
+🏁 Routines → encrypt() → ciphertext
 
 ### 4. Account Deletion (The "Nuclear" Option)
 Deleting your account destroys the mathematical keys required to read your data.

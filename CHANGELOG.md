@@ -5,6 +5,13 @@ All notable changes to Urai Space will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-21
+
+### 🚀 New Features
+- **Routine Tracking** - Design multi-day challenges with private daily journals.
+- **Mobile Enhancements** - Integrated hardware back button support and tactile haptic feedback.
+- **Improved Navigation** - Fixed TopBar and BottomNav for better mobile viewport usability.
+
 ## [1.2.0] - 2026-02-05
 
 ### 🚀 New Features
